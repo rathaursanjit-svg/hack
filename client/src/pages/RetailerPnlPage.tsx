@@ -3,14 +3,19 @@ import { FileSpreadsheet, ArrowRight, TrendingUp, TrendingDown, Info, AlertTrian
 import { api, formatInr } from '../services/api';
 import { DashboardMetrics } from '../types';
 import { useApp } from '../context/AppContext';
+import { RoleAccessRequired } from '../components/RoleAccessRequired';
 
 export const RetailerPnlPage: React.FC = () => {
-  const { showNotification } = useApp();
+  const { currentUser, showNotification } = useApp();
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPnl = async () => {
+      if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+        setLoading(false);
+        return;
+      }
       setLoading(true);
       try {
         const res = await api.getRetailerDashboard();
@@ -21,8 +26,17 @@ export const RetailerPnlPage: React.FC = () => {
         setLoading(false);
       }
     };
-    fetchPnl();
-  }, []);
+
+    if (currentUser?.role === 'retailer' || currentUser?.role === 'admin') {
+      fetchPnl();
+    } else {
+      setLoading(false);
+    }
+  }, [currentUser]);
+
+  if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+    return <RoleAccessRequired requiredRole="retailer" />;
+  }
 
   if (loading || !metrics) {
     return (

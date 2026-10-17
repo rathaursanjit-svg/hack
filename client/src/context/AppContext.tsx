@@ -49,12 +49,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const data = await api.getDemoUsers();
       setDemoUsers(data.users);
       
-      // Default to first consumer if none selected
+      // Check for saved user in localStorage first
+      const savedUserId = localStorage.getItem('sri_user_id');
+      const savedUser = savedUserId ? data.users.find(u => u.id === savedUserId) : null;
+      
       if (!currentUser) {
-        const defaultConsumer = data.users.find(u => u.role === 'consumer') || data.users[0];
-        if (defaultConsumer) {
-          setCurrentUser(defaultConsumer);
-          setApiDemoUser(defaultConsumer);
+        const targetUser = savedUser || data.users.find(u => u.role === 'consumer') || data.users[0];
+        if (targetUser) {
+          setCurrentUser(targetUser);
+          setApiDemoUser(targetUser);
         }
       }
     } catch (err) {
@@ -69,6 +72,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const switchUser = (user: User) => {
     setCurrentUser(user);
     setApiDemoUser(user);
+    localStorage.setItem('sri_user_id', user.id);
     showNotification(`Switched demo role to: ${user.name} (${user.role.toUpperCase()})`, 'info');
   };
 

@@ -3,14 +3,19 @@ import { Package, Check, X, FileText, CheckCircle2, Clock, AlertCircle } from 'l
 import { api, formatInr, formatDate } from '../services/api';
 import { Order } from '../types';
 import { useApp } from '../context/AppContext';
+import { RoleAccessRequired } from '../components/RoleAccessRequired';
 
 export const RetailerOrdersPage: React.FC = () => {
-  const { openInvoicePreview, showNotification } = useApp();
+  const { currentUser, openInvoicePreview, showNotification } = useApp();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState<string>('ALL');
 
   const fetchOrders = async () => {
+    if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const res = await api.getOrders();
@@ -23,8 +28,12 @@ export const RetailerOrdersPage: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
+    if (currentUser?.role === 'retailer' || currentUser?.role === 'admin') {
+      fetchOrders();
+    } else {
+      setLoading(false);
+    }
+  }, [currentUser]);
 
   const handleStatusChange = async (orderId: string, newStatus: string) => {
     try {
@@ -39,6 +48,10 @@ export const RetailerOrdersPage: React.FC = () => {
   const filteredOrders = filterStatus === 'ALL'
     ? orders
     : orders.filter(o => o.status === filterStatus);
+
+  if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+    return <RoleAccessRequired requiredRole="retailer" />;
+  }
 
   return (
     <div className="space-y-6">

@@ -15,6 +15,7 @@ import {
 import { api, formatInr, formatDate } from '../services/api';
 import { Product } from '../types';
 import { useApp } from '../context/AppContext';
+import { RoleAccessRequired } from '../components/RoleAccessRequired';
 
 export const RetailerInventoryPage: React.FC = () => {
   const { currentUser, showNotification } = useApp();
@@ -33,6 +34,10 @@ export const RetailerInventoryPage: React.FC = () => {
   const [submittingAdjust, setSubmittingAdjust] = useState(false);
 
   const loadStock = async () => {
+    if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       if (activeTab === 'STOCK') {
@@ -57,8 +62,12 @@ export const RetailerInventoryPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadStock();
-  }, [activeTab, category]);
+    if (currentUser?.role === 'retailer' || currentUser?.role === 'admin') {
+      loadStock();
+    } else {
+      setLoading(false);
+    }
+  }, [activeTab, category, currentUser]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,6 +103,10 @@ export const RetailerInventoryPage: React.FC = () => {
   const handleExportCsv = () => {
     window.open('/api/retailer/reports/export-csv?type=inventory', '_blank');
   };
+
+  if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+    return <RoleAccessRequired requiredRole="retailer" />;
+  }
 
   return (
     <div className="space-y-6">

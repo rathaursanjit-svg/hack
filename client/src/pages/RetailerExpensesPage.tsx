@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { DollarSign, Plus, X, Tag, FileText, Info } from 'lucide-react';
 import { api, formatInr, formatDate } from '../services/api';
 import { useApp } from '../context/AppContext';
+import { RoleAccessRequired } from '../components/RoleAccessRequired';
 
 export const RetailerExpensesPage: React.FC = () => {
-  const { showNotification } = useApp();
+  const { currentUser, showNotification } = useApp();
   const [expenses, setExpenses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,6 +18,10 @@ export const RetailerExpensesPage: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const loadExpenses = async () => {
+    if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const res = await api.getExpenses();
@@ -29,8 +34,12 @@ export const RetailerExpensesPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadExpenses();
-  }, []);
+    if (currentUser?.role === 'retailer' || currentUser?.role === 'admin') {
+      loadExpenses();
+    } else {
+      setLoading(false);
+    }
+  }, [currentUser]);
 
   const handleAddExpense = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,6 +72,10 @@ export const RetailerExpensesPage: React.FC = () => {
   };
 
   const totalExpensesPaise = expenses.reduce((sum, e) => sum + e.amount_paise, 0);
+
+  if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+    return <RoleAccessRequired requiredRole="retailer" />;
+  }
 
   return (
     <div className="space-y-6">

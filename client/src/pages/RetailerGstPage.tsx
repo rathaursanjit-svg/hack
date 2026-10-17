@@ -11,9 +11,10 @@ import {
 } from 'lucide-react';
 import { api, formatInr, formatDate } from '../services/api';
 import { useApp } from '../context/AppContext';
+import { RoleAccessRequired } from '../components/RoleAccessRequired';
 
 export const RetailerGstPage: React.FC = () => {
-  const { showNotification } = useApp();
+  const { currentUser, showNotification } = useApp();
   const [activeTab, setActiveTab] = useState<'SUMMARY' | 'SALES' | 'PURCHASES'>('SUMMARY');
   const [metrics, setMetrics] = useState<any>(null);
   const [salesRegister, setSalesRegister] = useState<any[]>([]);
@@ -21,6 +22,10 @@ export const RetailerGstPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const loadGstData = async () => {
+    if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const [dashRes, salesRes, purRes] = await Promise.all([
@@ -39,12 +44,20 @@ export const RetailerGstPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadGstData();
-  }, []);
+    if (currentUser?.role === 'retailer' || currentUser?.role === 'admin') {
+      loadGstData();
+    } else {
+      setLoading(false);
+    }
+  }, [currentUser]);
 
   const handleExportCsv = (type: 'sales' | 'purchases') => {
     window.open(`/api/retailer/reports/export-csv?type=${type}`, '_blank');
   };
+
+  if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+    return <RoleAccessRequired requiredRole="retailer" />;
+  }
 
   return (
     <div className="space-y-6">

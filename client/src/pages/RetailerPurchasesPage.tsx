@@ -3,9 +3,10 @@ import { Receipt, Plus, FileSpreadsheet, AlertCircle, CheckCircle, X, Trash2 } f
 import { api, formatInr, formatDate } from '../services/api';
 import { Product } from '../types';
 import { useApp } from '../context/AppContext';
+import { RoleAccessRequired } from '../components/RoleAccessRequired';
 
 export const RetailerPurchasesPage: React.FC = () => {
-  const { showNotification } = useApp();
+  const { currentUser, showNotification } = useApp();
   const [purchases, setPurchases] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,6 +29,10 @@ export const RetailerPurchasesPage: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const loadPurchases = async () => {
+    if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const res = await api.getPurchases();
@@ -40,8 +45,12 @@ export const RetailerPurchasesPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadPurchases();
-  }, []);
+    if (currentUser?.role === 'retailer' || currentUser?.role === 'admin') {
+      loadPurchases();
+    } else {
+      setLoading(false);
+    }
+  }, [currentUser]);
 
   const openNewPurchaseModal = async () => {
     try {
@@ -145,6 +154,10 @@ export const RetailerPurchasesPage: React.FC = () => {
   const handleExportCsv = () => {
     window.open('/api/retailer/reports/export-csv?type=purchases', '_blank');
   };
+
+  if (currentUser && currentUser.role !== 'retailer' && currentUser.role !== 'admin') {
+    return <RoleAccessRequired requiredRole="retailer" />;
+  }
 
   return (
     <div className="space-y-6">
