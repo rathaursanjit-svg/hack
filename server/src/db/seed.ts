@@ -171,49 +171,147 @@ export async function seedDatabase(): Promise<void> {
     );
   }
 
-  // 5. Seed 26 Products across 3 Suppliers
-  const masterProducts = [
+  // 5. Seed Products for ALL 5 Marketplace Shops
+  // Shop 1 (Sharma Kirana & Daily Store - Delhi) - 26 Master Products
+  const shop1Products = [
     // Heritage Agro Commodities (sup_2)
-    { id: 'prd_1', sup: 'sup_2', name: 'Sharbati Whole Wheat Atta 5kg', sku: 'ATT-WHT-05K', cat: 'Grocery', unit: 'pack', price: 23500, cost: 19500, tax: 5.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_2', sup: 'sup_2', name: 'Royal Basmati Rice 5kg', sku: 'RIC-BAS-05K', cat: 'Grocery', unit: 'pack', price: 48000, cost: 41000, tax: 5.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_3', sup: 'sup_2', name: 'Organic Toor Dal 1kg', sku: 'DAL-TOO-01K', cat: 'Grocery', unit: 'kg', price: 17500, cost: 14500, tax: 0.0, inc: 1, min: 15, img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_4', sup: 'sup_2', name: 'Fortune Mustard Oil 1L', sku: 'OIL-MUS-01L', cat: 'Grocery', unit: 'bottle', price: 16500, cost: 14200, tax: 5.0, inc: 1, min: 12, img: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_5', sup: 'sup_2', name: 'Tata Premium Iodized Salt 1kg', sku: 'SLT-IOD-01K', cat: 'Grocery', unit: 'pack', price: 2800, cost: 2100, tax: 0.0, inc: 1, min: 20, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_22', sup: 'sup_2', name: 'Catch Coriander Powder 200g', sku: 'SPC-CAT-200', cat: 'Grocery', unit: 'pack', price: 6500, cost: 5100, tax: 5.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_23', sup: 'sup_2', name: 'Everest Turmeric Powder 200g', sku: 'SPC-EVE-200', cat: 'Grocery', unit: 'pack', price: 5800, cost: 4500, tax: 5.0, inc: 1, min: 12, img: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_24', sup: 'sup_2', name: 'Desi Chana Dal Unpolished 1kg', sku: 'DAL-CHN-01K', cat: 'Grocery', unit: 'kg', price: 13500, cost: 11000, tax: 0.0, inc: 1, min: 15, img: 'https://images.unsplash.com/photo-1585994192701-f1a505c8574a?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_1', sup: 'sup_2', shopId: 'shp_1', name: 'Sharbati Whole Wheat Atta 5kg', sku: 'ATT-WHT-05K', cat: 'Grocery', unit: 'pack', price: 23500, cost: 19500, tax: 5.0, inc: 1, min: 10, stock: 45, img: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_2', sup: 'sup_2', shopId: 'shp_1', name: 'Royal Basmati Rice 5kg', sku: 'RIC-BAS-05K', cat: 'Grocery', unit: 'pack', price: 48000, cost: 41000, tax: 5.0, inc: 1, min: 10, stock: 32, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_3', sup: 'sup_2', shopId: 'shp_1', name: 'Organic Toor Dal 1kg', sku: 'DAL-TOO-01K', cat: 'Grocery', unit: 'kg', price: 17500, cost: 14500, tax: 0.0, inc: 1, min: 15, stock: 55, img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_4', sup: 'sup_2', shopId: 'shp_1', name: 'Fortune Mustard Oil 1L', sku: 'OIL-MUS-01L', cat: 'Grocery', unit: 'bottle', price: 16500, cost: 14200, tax: 5.0, inc: 1, min: 12, stock: 6, img: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_5', sup: 'sup_2', shopId: 'shp_1', name: 'Tata Premium Iodized Salt 1kg', sku: 'SLT-IOD-01K', cat: 'Grocery', unit: 'pack', price: 2800, cost: 2100, tax: 0.0, inc: 1, min: 20, stock: 80, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_22', sup: 'sup_2', shopId: 'shp_1', name: 'Catch Coriander Powder 200g', sku: 'SPC-CAT-200', cat: 'Grocery', unit: 'pack', price: 6500, cost: 5100, tax: 5.0, inc: 1, min: 10, stock: 24, img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_23', sup: 'sup_2', shopId: 'shp_1', name: 'Everest Turmeric Powder 200g', sku: 'SPC-EVE-200', cat: 'Grocery', unit: 'pack', price: 5800, cost: 4500, tax: 5.0, inc: 1, min: 12, stock: 120, img: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_24', sup: 'sup_2', shopId: 'shp_1', name: 'Desi Chana Dal Unpolished 1kg', sku: 'DAL-CHN-01K', cat: 'Grocery', unit: 'kg', price: 13500, cost: 11000, tax: 0.0, inc: 1, min: 15, stock: 0, img: 'https://images.unsplash.com/photo-1585994192701-f1a505c8574a?auto=format&fit=crop&w=400&q=80' },
 
     // Apex FMCG Distributors (sup_1)
-    { id: 'prd_6', sup: 'sup_1', name: 'Brooke Bond Red Label Tea 500g', sku: 'TEA-RED-500', cat: 'Beverages', unit: 'pack', price: 29000, cost: 24500, tax: 5.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_7', sup: 'sup_1', name: 'Nescafe Classic Instant Coffee 100g', sku: 'COF-NES-100', cat: 'Beverages', unit: 'jar', price: 34000, cost: 28500, tax: 18.0, inc: 1, min: 8, img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_8', sup: 'sup_1', name: 'Parle-G Glucose Biscuits 250g', sku: 'BIS-PAR-250', cat: 'Snacks', unit: 'pack', price: 2500, cost: 2000, tax: 5.0, inc: 1, min: 25, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_9', sup: 'sup_1', name: 'Haldiram Aloo Bhujia 400g', sku: 'SNK-HAL-400', cat: 'Snacks', unit: 'pack', price: 11000, cost: 8900, tax: 12.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_10', sup: 'sup_1', name: 'Amul Pure Ghee 1L Tin', sku: 'GHE-AMU-01L', cat: 'Dairy', unit: 'tin', price: 65000, cost: 58000, tax: 12.0, inc: 1, min: 5, img: 'https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_11', sup: 'sup_1', name: 'Dettol Original Bathing Soap (Pack of 4)', sku: 'SOP-DET-4PK', cat: 'Personal Care', unit: 'pack', price: 19500, cost: 16000, tax: 18.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1607006314144-8cb389745e31?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_12', sup: 'sup_1', name: 'Colgate Total Dental Cream 200g', sku: 'PST-COL-200', cat: 'Personal Care', unit: 'tube', price: 16500, cost: 13500, tax: 18.0, inc: 1, min: 12, img: 'https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_13', sup: 'sup_1', name: 'Surf Excel Matic Liquid Detergent 1L', sku: 'DET-SRF-01L', cat: 'Household', unit: 'bottle', price: 24000, cost: 19800, tax: 18.0, inc: 1, min: 8, img: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_14', sup: 'sup_1', name: 'Vim Dishwash Gel Lemon 750ml', sku: 'VIM-GEL-750', cat: 'Household', unit: 'bottle', price: 15500, cost: 12500, tax: 18.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_15', sup: 'sup_1', name: 'Lizol Floral Surface Cleaner 1L', sku: 'LIZ-FLO-01L', cat: 'Household', unit: 'bottle', price: 21000, cost: 17200, tax: 18.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1584813470613-5b1c1cad3d69?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_20', sup: 'sup_1', name: 'Coca-Cola Zero Sugar 750ml Pet Bottle', sku: 'BEV-CCZ-750', cat: 'Beverages', unit: 'bottle', price: 4500, cost: 3500, tax: 28.0, inc: 1, min: 15, img: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_21', sup: 'sup_1', name: 'Cadbury Dairy Milk Silk 150g', sku: 'CHK-CAD-150', cat: 'Snacks', unit: 'bar', price: 18000, cost: 14800, tax: 18.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_6', sup: 'sup_1', shopId: 'shp_1', name: 'Brooke Bond Red Label Tea 500g', sku: 'TEA-RED-500', cat: 'Beverages', unit: 'pack', price: 29000, cost: 24500, tax: 5.0, inc: 1, min: 10, stock: 18, img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_7', sup: 'sup_1', shopId: 'shp_1', name: 'Nescafe Classic Instant Coffee 100g', sku: 'COF-NES-100', cat: 'Beverages', unit: 'jar', price: 34000, cost: 28500, tax: 18.0, inc: 1, min: 8, stock: 40, img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_8', sup: 'sup_1', shopId: 'shp_1', name: 'Parle-G Glucose Biscuits 250g', sku: 'BIS-PAR-250', cat: 'Snacks', unit: 'pack', price: 2500, cost: 2000, tax: 5.0, inc: 1, min: 25, stock: 5, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_9', sup: 'sup_1', shopId: 'shp_1', name: 'Haldiram Aloo Bhujia 400g', sku: 'SNK-HAL-400', cat: 'Snacks', unit: 'pack', price: 11000, cost: 8900, tax: 12.0, inc: 1, min: 10, stock: 22, img: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_10', sup: 'sup_1', shopId: 'shp_1', name: 'Amul Pure Ghee 1L Tin', sku: 'GHE-AMU-01L', cat: 'Dairy', unit: 'tin', price: 65000, cost: 58000, tax: 12.0, inc: 1, min: 5, stock: 35, img: 'https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_11', sup: 'sup_1', shopId: 'shp_1', name: 'Dettol Original Bathing Soap (Pack of 4)', sku: 'SOP-DET-4PK', cat: 'Personal Care', unit: 'pack', price: 19500, cost: 16000, tax: 18.0, inc: 1, min: 10, stock: 28, img: 'https://images.unsplash.com/photo-1607006314144-8cb389745e31?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_12', sup: 'sup_1', shopId: 'shp_1', name: 'Colgate Total Dental Cream 200g', sku: 'PST-COL-200', cat: 'Personal Care', unit: 'tube', price: 16500, cost: 13500, tax: 18.0, inc: 1, min: 12, stock: 45, img: 'https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_13', sup: 'sup_1', shopId: 'shp_1', name: 'Surf Excel Matic Liquid Detergent 1L', sku: 'DET-SRF-01L', cat: 'Household', unit: 'bottle', price: 24000, cost: 19800, tax: 18.0, inc: 1, min: 8, stock: 70, img: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_14', sup: 'sup_1', shopId: 'shp_1', name: 'Vim Dishwash Gel Lemon 750ml', sku: 'VIM-GEL-750', cat: 'Household', unit: 'bottle', price: 15500, cost: 12500, tax: 18.0, inc: 1, min: 10, stock: 3, img: 'https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_15', sup: 'sup_1', shopId: 'shp_1', name: 'Lizol Floral Surface Cleaner 1L', sku: 'LIZ-FLO-01L', cat: 'Household', unit: 'bottle', price: 21000, cost: 17200, tax: 18.0, inc: 1, min: 10, stock: 50, img: 'https://images.unsplash.com/photo-1584813470613-5b1c1cad3d69?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_20', sup: 'sup_1', shopId: 'shp_1', name: 'Coca-Cola Zero Sugar 750ml Pet Bottle', sku: 'BEV-CCZ-750', cat: 'Beverages', unit: 'bottle', price: 4500, cost: 3500, tax: 28.0, inc: 1, min: 15, stock: 60, img: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_21', sup: 'sup_1', shopId: 'shp_1', name: 'Cadbury Dairy Milk Silk 150g', sku: 'CHK-CAD-150', cat: 'Snacks', unit: 'bar', price: 18000, cost: 14800, tax: 18.0, inc: 1, min: 10, stock: 25, img: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=400&q=80' },
 
     // Bharat Office & Stationery (sup_3)
-    { id: 'prd_16', sup: 'sup_3', name: 'Classmate Ruled Notebook 172 Pgs (Pack of 6)', sku: 'STA-CLS-6PK', cat: 'Stationery', unit: 'pack', price: 36000, cost: 29000, tax: 12.0, inc: 1, min: 15, img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_17', sup: 'sup_3', name: 'Reynolds 045 Fine Ballpoint Pens (Pack of 10)', sku: 'PEN-REY-10P', cat: 'Stationery', unit: 'box', price: 10000, cost: 7500, tax: 12.0, inc: 1, min: 20, img: 'https://images.unsplash.com/photo-1585336261026-6b2165089f2a?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_18', sup: 'sup_3', name: 'JK Copier A4 Paper Ream (500 Sheets 75GSM)', sku: 'PPR-JKC-500', cat: 'Stationery', unit: 'ream', price: 34000, cost: 28500, tax: 12.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_19', sup: 'sup_3', name: 'Fevicol MR Squeezy Glue 100g', sku: 'GLU-FEV-100', cat: 'Stationery', unit: 'bottle', price: 4500, cost: 3400, tax: 18.0, inc: 1, min: 15, img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_25', sup: 'sup_3', name: 'Camlin Whiteboard Marker Set (4 Colors)', sku: 'STA-CAM-4MK', cat: 'Stationery', unit: 'set', price: 14000, cost: 11000, tax: 18.0, inc: 1, min: 10, img: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=400&q=80' },
-    { id: 'prd_26', sup: 'sup_3', name: 'Kangaro Heavy Duty Paper Stapler HD-10D', sku: 'STA-KNG-STP', cat: 'Stationery', unit: 'pcs', price: 18500, cost: 14500, tax: 18.0, inc: 1, min: 8, img: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=400&q=80' }
+    { id: 'prd_16', sup: 'sup_3', shopId: 'shp_1', name: 'Classmate Ruled Notebook 172 Pgs (Pack of 6)', sku: 'STA-CLS-6PK', cat: 'Stationery', unit: 'pack', price: 36000, cost: 29000, tax: 12.0, inc: 1, min: 15, stock: 38, img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_17', sup: 'sup_3', shopId: 'shp_1', name: 'Reynolds 045 Fine Ballpoint Pens (Pack of 10)', sku: 'PEN-REY-10P', cat: 'Stationery', unit: 'box', price: 10000, cost: 7500, tax: 12.0, inc: 1, min: 20, stock: 42, img: 'https://images.unsplash.com/photo-1585336261026-6b2165089f2a?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_18', sup: 'sup_3', shopId: 'shp_1', name: 'JK Copier A4 Paper Ream (500 Sheets 75GSM)', sku: 'PPR-JKC-500', cat: 'Stationery', unit: 'ream', price: 34000, cost: 28500, tax: 12.0, inc: 1, min: 10, stock: 19, img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_19', sup: 'sup_3', shopId: 'shp_1', name: 'Fevicol MR Squeezy Glue 100g', sku: 'GLU-FEV-100', cat: 'Stationery', unit: 'bottle', price: 4500, cost: 3400, tax: 18.0, inc: 1, min: 15, stock: 30, img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_25', sup: 'sup_3', shopId: 'shp_1', name: 'Camlin Whiteboard Marker Set (4 Colors)', sku: 'STA-CAM-4MK', cat: 'Stationery', unit: 'set', price: 14000, cost: 11000, tax: 18.0, inc: 1, min: 10, stock: 14, img: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_26', sup: 'sup_3', shopId: 'shp_1', name: 'Kangaro Heavy Duty Paper Stapler HD-10D', sku: 'STA-KNG-STP', cat: 'Stationery', unit: 'pcs', price: 18500, cost: 14500, tax: 18.0, inc: 1, min: 8, stock: 22, img: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=400&q=80' }
   ];
 
-  // Insert master products into products table
-  // Stock values are varied across categories to show normal stock, low stock, and out-of-stock
-  const baseStockVariations = [45, 32, 55, 6, 80, 4, 24, 120, 0, 18, 40, 5, 22, 35, 28, 45, 70, 3, 50, 60, 25, 38, 42, 19, 30, 14];
+  // Shop 2: Krishna Supermart & Organics (Noida, UP) - 20 Organic & Supermarket Items
+  const shop2Products = [
+    { id: 'prd_s2_1', sup: 'sup_2', shopId: 'shp_2', name: 'Organic Sharbati Whole Wheat Atta 5kg', sku: 'KSO-ATT-05K', cat: 'Grocery', unit: 'pack', price: 28500, cost: 23500, tax: 5.0, inc: 1, min: 10, stock: 42, img: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_2', sup: 'sup_2', shopId: 'shp_2', name: 'Organic Royal Biryani Basmati Rice 5kg', sku: 'KSO-RIC-05K', cat: 'Grocery', unit: 'pack', price: 54000, cost: 46000, tax: 5.0, inc: 1, min: 10, stock: 35, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_3', sup: 'sup_2', shopId: 'shp_2', name: 'Organic Unpolished Toor Dal 1kg', sku: 'KSO-DAL-TOO', cat: 'Grocery', unit: 'kg', price: 19500, cost: 16000, tax: 0.0, inc: 1, min: 15, stock: 50, img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_4', sup: 'sup_2', shopId: 'shp_2', name: 'Wood Cold-Pressed Yellow Mustard Oil 1L', sku: 'KSO-OIL-01L', cat: 'Grocery', unit: 'bottle', price: 22000, cost: 18500, tax: 5.0, inc: 1, min: 12, stock: 28, img: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_5', sup: 'sup_2', shopId: 'shp_2', name: 'Pure Himalayan Pink Rock Salt 1kg', sku: 'KSO-SLT-PNK', cat: 'Grocery', unit: 'pack', price: 6500, cost: 4500, tax: 0.0, inc: 1, min: 20, stock: 65, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_6', sup: 'sup_2', shopId: 'shp_2', name: 'Organic Coriander Seeds & Powder 200g', sku: 'KSO-SPC-COR', cat: 'Grocery', unit: 'pack', price: 7500, cost: 5800, tax: 5.0, inc: 1, min: 10, stock: 30, img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_7', sup: 'sup_2', shopId: 'shp_2', name: 'Pure Organic Lakadong Turmeric Powder 200g', sku: 'KSO-SPC-TUR', cat: 'Grocery', unit: 'pack', price: 9500, cost: 7200, tax: 5.0, inc: 1, min: 10, stock: 24, img: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_8', sup: 'sup_2', shopId: 'shp_2', name: 'Organic Kabuli Chana Chickpeas 1kg', sku: 'KSO-DAL-CHN', cat: 'Grocery', unit: 'kg', price: 18000, cost: 14500, tax: 0.0, inc: 1, min: 15, stock: 40, img: 'https://images.unsplash.com/photo-1585994192701-f1a505c8574a?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_9', sup: 'sup_1', shopId: 'shp_2', name: 'Organic Green Tea with Tulsi & Ginger 250g', sku: 'KSO-TEA-TLS', cat: 'Beverages', unit: 'pack', price: 32000, cost: 26000, tax: 5.0, inc: 1, min: 10, stock: 22, img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_10', sup: 'sup_1', shopId: 'shp_2', name: 'Artisanal Medium Roast Filter Coffee 200g', sku: 'KSO-COF-ART', cat: 'Beverages', unit: 'jar', price: 39000, cost: 32000, tax: 18.0, inc: 1, min: 8, stock: 15, img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_11', sup: 'sup_1', shopId: 'shp_2', name: 'Organic Ragi Multigrain Digestive Biscuits 300g', sku: 'KSO-BIS-RAG', cat: 'Snacks', unit: 'pack', price: 8500, cost: 6800, tax: 5.0, inc: 1, min: 15, stock: 38, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_12', sup: 'sup_1', shopId: 'shp_2', name: 'Slow Roasted Herb Makhana (Foxnuts) 100g', sku: 'KSO-SNK-MKH', cat: 'Snacks', unit: 'pack', price: 14000, cost: 11000, tax: 12.0, inc: 1, min: 12, stock: 20, img: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_13', sup: 'sup_1', shopId: 'shp_2', name: 'Vedic A2 Desi Gir Cow Cultured Ghee 500ml', sku: 'KSO-GHE-A2G', cat: 'Dairy', unit: 'jar', price: 115000, cost: 95000, tax: 12.0, inc: 1, min: 5, stock: 12, img: 'https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_14', sup: 'sup_1', shopId: 'shp_2', name: 'Organic Fresh Cow Milk Paneer 200g', sku: 'KSO-PAN-200', cat: 'Dairy', unit: 'pack', price: 11000, cost: 9000, tax: 0.0, inc: 1, min: 8, stock: 18, img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_15', sup: 'sup_1', shopId: 'shp_2', name: 'Handmade Neem & Aloe Vera Ayurvedic Soap (Pack of 3)', sku: 'KSO-SOP-NEM', cat: 'Personal Care', unit: 'pack', price: 24000, cost: 19000, tax: 18.0, inc: 1, min: 10, stock: 25, img: 'https://images.unsplash.com/photo-1607006314144-8cb389745e31?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_16', sup: 'sup_1', shopId: 'shp_2', name: 'Ayurvedic Clove & Mint Herbal Toothpaste 150g', sku: 'KSO-PST-HRB', cat: 'Personal Care', unit: 'tube', price: 15000, cost: 11800, tax: 18.0, inc: 1, min: 10, stock: 22, img: 'https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_17', sup: 'sup_1', shopId: 'shp_2', name: 'Eco-Friendly Plant-Based Laundry Detergent 1L', sku: 'KSO-DET-ECO', cat: 'Household', unit: 'bottle', price: 34000, cost: 27000, tax: 18.0, inc: 1, min: 8, stock: 16, img: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_18', sup: 'sup_1', shopId: 'shp_2', name: 'Citrus Bio-Enzyme Natural Kitchen Cleaner 500ml', sku: 'KSO-CLN-BIO', cat: 'Household', unit: 'bottle', price: 19500, cost: 15500, tax: 18.0, inc: 1, min: 10, stock: 20, img: 'https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_19', sup: 'sup_2', shopId: 'shp_2', name: 'Wild Forest Raw Unprocessed Honey 500g', sku: 'KSO-HNY-500', cat: 'Grocery', unit: 'jar', price: 36000, cost: 29000, tax: 5.0, inc: 1, min: 8, stock: 14, img: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s2_20', sup: 'sup_3', shopId: 'shp_2', name: 'Recycled Eco-Kraft Ruled Journal Notebook (Pack of 3)', sku: 'KSO-STA-KRF', cat: 'Stationery', unit: 'pack', price: 29000, cost: 22000, tax: 12.0, inc: 1, min: 10, stock: 28, img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80' }
+  ];
 
-  for (let i = 0; i < masterProducts.length; i++) {
-    const p = masterProducts[i];
-    const initialStock = baseStockVariations[i] ?? 30;
+  // Shop 3: Lakshmi General & Spices Store (Old Delhi) - 20 Authentic Spices & Staples
+  const shop3Products = [
+    { id: 'prd_s3_1', sup: 'sup_2', shopId: 'shp_3', name: 'Special Degi Mirch Kashmiri Chilli Powder 200g', sku: 'LGS-SPC-KMR', cat: 'Grocery', unit: 'pack', price: 8800, cost: 6800, tax: 5.0, inc: 1, min: 15, stock: 65, img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_2', sup: 'sup_2', shopId: 'shp_3', name: 'Old Delhi Royal Shahi Garam Masala 100g', sku: 'LGS-SPC-GAR', cat: 'Grocery', unit: 'pack', price: 9200, cost: 7100, tax: 5.0, inc: 1, min: 12, stock: 45, img: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_3', sup: 'sup_2', shopId: 'shp_3', name: 'Whole Sabut Jeera (Cumin Seeds) 250g', sku: 'LGS-SPC-JEE', cat: 'Grocery', unit: 'pack', price: 12500, cost: 9800, tax: 5.0, inc: 1, min: 15, stock: 55, img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_4', sup: 'sup_2', shopId: 'shp_3', name: 'Kasturi Methi Sun-Dried Fenugreek Leaves 100g', sku: 'LGS-SPC-MET', cat: 'Grocery', unit: 'box', price: 5500, cost: 4100, tax: 5.0, inc: 1, min: 10, stock: 32, img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_5', sup: 'sup_2', shopId: 'shp_3', name: 'Badi Elaichi (Black Cardamom Large) 100g', sku: 'LGS-SPC-ELA', cat: 'Grocery', unit: 'pack', price: 18500, cost: 14800, tax: 5.0, inc: 1, min: 8, stock: 20, img: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_6', sup: 'sup_2', shopId: 'shp_3', name: 'Chandni Chowk Chana Masala Blend 100g', sku: 'LGS-SPC-CHN', cat: 'Grocery', unit: 'pack', price: 6800, cost: 5200, tax: 5.0, inc: 1, min: 12, stock: 48, img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_7', sup: 'sup_2', shopId: 'shp_3', name: 'Wada Kolam Traditional Rice 5kg', sku: 'LGS-RIC-KOL', cat: 'Grocery', unit: 'pack', price: 39500, cost: 33000, tax: 5.0, inc: 1, min: 10, stock: 40, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_8', sup: 'sup_2', shopId: 'shp_3', name: 'Moong Dal Dhuli (Yellow Split) 1kg', sku: 'LGS-DAL-MNG', cat: 'Grocery', unit: 'kg', price: 14500, cost: 12000, tax: 0.0, inc: 1, min: 15, stock: 52, img: 'https://images.unsplash.com/photo-1585994192701-f1a505c8574a?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_9', sup: 'sup_2', shopId: 'shp_3', name: 'Kashmiri Rajma Chitra (Kidney Beans) 1kg', sku: 'LGS-DAL-RAJ', cat: 'Grocery', unit: 'kg', price: 17500, cost: 14200, tax: 0.0, inc: 1, min: 15, stock: 38, img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_10', sup: 'sup_2', shopId: 'shp_3', name: 'Pure Til (Sesame Gingelly) Oil 500ml', sku: 'LGS-OIL-TIL', cat: 'Grocery', unit: 'bottle', price: 19000, cost: 15800, tax: 5.0, inc: 1, min: 10, stock: 26, img: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_11', sup: 'sup_1', shopId: 'shp_3', name: 'Assam CTC Masala Chai Strong Leaf Tea 500g', sku: 'LGS-TEA-ASM', cat: 'Beverages', unit: 'pack', price: 27500, cost: 22500, tax: 5.0, inc: 1, min: 12, stock: 45, img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_12', sup: 'sup_1', shopId: 'shp_3', name: 'Spicy Ratlami Sev Namkeen 400g', sku: 'LGS-SNK-RAT', cat: 'Snacks', unit: 'pack', price: 12000, cost: 9500, tax: 12.0, inc: 1, min: 15, stock: 50, img: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_13', sup: 'sup_1', shopId: 'shp_3', name: 'Crispy Bikaneri Bhujia 400g', sku: 'LGS-SNK-BIK', cat: 'Snacks', unit: 'pack', price: 11500, cost: 9200, tax: 12.0, inc: 1, min: 15, stock: 48, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_14', sup: 'sup_2', shopId: 'shp_3', name: 'Traditional Mustard Mango Pickle (Aam Achar) 1kg', sku: 'LGS-PCK-AAM', cat: 'Grocery', unit: 'jar', price: 21000, cost: 16500, tax: 12.0, inc: 1, min: 10, stock: 22, img: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_15', sup: 'sup_1', shopId: 'shp_3', name: 'Desi Buffalo Milk Danedar Ghee 1L Tin', sku: 'LGS-GHE-BUF', cat: 'Dairy', unit: 'tin', price: 68000, cost: 59000, tax: 12.0, inc: 1, min: 5, stock: 15, img: 'https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_16', sup: 'sup_1', shopId: 'shp_3', name: 'Mysore Sandal Pure Sandalwood Oil Soap 150g', sku: 'LGS-SOP-MYS', cat: 'Personal Care', unit: 'bar', price: 9500, cost: 7600, tax: 18.0, inc: 1, min: 12, stock: 35, img: 'https://images.unsplash.com/photo-1607006314144-8cb389745e31?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_17', sup: 'sup_1', shopId: 'shp_3', name: 'Dabur Red Ayurvedic Toothpaste 200g', sku: 'LGS-PST-RED', cat: 'Personal Care', unit: 'tube', price: 13500, cost: 10800, tax: 18.0, inc: 1, min: 10, stock: 30, img: 'https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_18', sup: 'sup_1', shopId: 'shp_3', name: 'Pitambari Shining Powder for Copper & Brass 200g', sku: 'LGS-CLN-PIT', cat: 'Household', unit: 'pack', price: 5500, cost: 4200, tax: 18.0, inc: 1, min: 15, stock: 40, img: 'https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_19', sup: 'sup_2', shopId: 'shp_3', name: 'Pure Bhimseni Camphor (Kapur Tablets) 100g', sku: 'LGS-POO-KPR', cat: 'Household', unit: 'pack', price: 16000, cost: 12500, tax: 12.0, inc: 1, min: 10, stock: 25, img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s3_20', sup: 'sup_3', shopId: 'shp_3', name: 'Zed Black Premium Agarbatti Incense (Box of 6)', sku: 'LGS-POO-AGR', cat: 'Household', unit: 'box', price: 12000, cost: 9000, tax: 5.0, inc: 1, min: 15, stock: 50, img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80' }
+  ];
 
+  // Shop 4: Patel Provisions & Dairy (Indirapuram, UP) - 20 Dairy, Morning Bakery & Staples
+  const shop4Products = [
+    { id: 'prd_s4_1', sup: 'sup_1', shopId: 'shp_4', name: 'Amul Taaza Homogenised Toned Milk 1L Tetra', sku: 'PPD-MLK-TAZ', cat: 'Dairy', unit: 'carton', price: 7400, cost: 6500, tax: 0.0, inc: 1, min: 15, stock: 60, img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_2', sup: 'sup_1', shopId: 'shp_4', name: 'Mother Dairy Cow Milk Fresh 1L Pouch', sku: 'PPD-MLK-COW', cat: 'Dairy', unit: 'pouch', price: 5800, cost: 5100, tax: 0.0, inc: 1, min: 20, stock: 45, img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_3', sup: 'sup_1', shopId: 'shp_4', name: 'Fresh Malai Paneer 500g Vacuum Pack', sku: 'PPD-PAN-500', cat: 'Dairy', unit: 'pack', price: 21000, cost: 18000, tax: 0.0, inc: 1, min: 10, stock: 32, img: 'https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_4', sup: 'sup_1', shopId: 'shp_4', name: 'Amul Pasteurised Salted Table Butter 500g', sku: 'PPD-BUT-500', cat: 'Dairy', unit: 'pack', price: 27500, cost: 24500, tax: 12.0, inc: 1, min: 10, stock: 28, img: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_5', sup: 'sup_1', shopId: 'shp_4', name: 'Amul Masti Dahi Set Curd 400g Tub', sku: 'PPD-CUR-400', cat: 'Dairy', unit: 'tub', price: 3800, cost: 3100, tax: 5.0, inc: 1, min: 15, stock: 36, img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_6', sup: 'sup_1', shopId: 'shp_4', name: 'Amul Pure Ghee 1L Tin', sku: 'PPD-GHE-01L', cat: 'Dairy', unit: 'tin', price: 65000, cost: 58000, tax: 12.0, inc: 1, min: 5, stock: 20, img: 'https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_7', sup: 'sup_1', shopId: 'shp_4', name: 'Britannia 100% Whole Wheat Bread 400g', sku: 'PPD-BRD-WHT', cat: 'Snacks', unit: 'pack', price: 5000, cost: 4100, tax: 0.0, inc: 1, min: 12, stock: 30, img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_8', sup: 'sup_1', shopId: 'shp_4', name: 'Farm Fresh Brown Eggs (Pack of 6)', sku: 'PPD-EGG-06P', cat: 'Dairy', unit: 'pack', price: 6500, cost: 5200, tax: 0.0, inc: 1, min: 15, stock: 40, img: 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_9', sup: 'sup_1', shopId: 'shp_4', name: 'Kellogg’s Real Almond & Honey Corn Flakes 500g', sku: 'PPD-CRN-500', cat: 'Snacks', unit: 'box', price: 29500, cost: 24500, tax: 18.0, inc: 1, min: 8, stock: 18, img: 'https://images.unsplash.com/photo-1521483451569-e33803c0330c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_10', sup: 'sup_1', shopId: 'shp_4', name: 'Kissan Fresh Tomato Ketchup Bottle 1kg', sku: 'PPD-SAU-01K', cat: 'Grocery', unit: 'bottle', price: 14500, cost: 11800, tax: 12.0, inc: 1, min: 10, stock: 25, img: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_11', sup: 'sup_1', shopId: 'shp_4', name: 'Nutella Hazelnut Cocoa Spread Jar 350g', sku: 'PPD-NUT-350', cat: 'Snacks', unit: 'jar', price: 39000, cost: 32500, tax: 18.0, inc: 1, min: 6, stock: 14, img: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_12', sup: 'sup_2', shopId: 'shp_4', name: 'Quaker Rolled Wholegrain Oats 1kg', sku: 'PPD-OAT-01K', cat: 'Grocery', unit: 'pouch', price: 19500, cost: 16000, tax: 5.0, inc: 1, min: 10, stock: 28, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_13', sup: 'sup_2', shopId: 'shp_4', name: 'Fortune Sunlite Refined Sunflower Oil 1L', sku: 'PPD-OIL-SUN', cat: 'Grocery', unit: 'pouch', price: 15500, cost: 13200, tax: 5.0, inc: 1, min: 12, stock: 35, img: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_14', sup: 'sup_2', shopId: 'shp_4', name: 'Aashirvaad Superior MP Sharbati Atta 5kg', sku: 'PPD-ATT-AAS', cat: 'Grocery', unit: 'pack', price: 26000, cost: 22000, tax: 5.0, inc: 1, min: 10, stock: 40, img: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_15', sup: 'sup_1', shopId: 'shp_4', name: 'Tata Tea Gold Rich Taste & Aroma 500g', sku: 'PPD-TEA-GLD', cat: 'Beverages', unit: 'pack', price: 31000, cost: 26000, tax: 5.0, inc: 1, min: 10, stock: 32, img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_16', sup: 'sup_1', shopId: 'shp_4', name: 'Oreo Original Vanilla Creme Cookies 150g', sku: 'PPD-BIS-ORE', cat: 'Snacks', unit: 'pack', price: 4000, cost: 3200, tax: 18.0, inc: 1, min: 20, stock: 60, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_17', sup: 'sup_1', shopId: 'shp_4', name: 'Britannia Processed Cheese Slices (Pack of 10)', sku: 'PPD-CHS-10P', cat: 'Dairy', unit: 'pack', price: 16500, cost: 13800, tax: 12.0, inc: 1, min: 8, stock: 22, img: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_18', sup: 'sup_1', shopId: 'shp_4', name: 'Epigamia Strawberry Greek Yogurt 100g Cup', sku: 'PPD-YOG-STR', cat: 'Dairy', unit: 'cup', price: 5000, cost: 4000, tax: 12.0, inc: 1, min: 12, stock: 26, img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_19', sup: 'sup_1', shopId: 'shp_4', name: 'Lifebuoy Total 10 Antibacterial Handwash 750ml', sku: 'PPD-HW-750', cat: 'Personal Care', unit: 'pouch', price: 12500, cost: 9800, tax: 18.0, inc: 1, min: 10, stock: 24, img: 'https://images.unsplash.com/photo-1584813470613-5b1c1cad3d69?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s4_20', sup: 'sup_1', shopId: 'shp_4', name: 'Scotch-Brite Heavy Duty Kitchen Scrub Sponge (Pack of 3)', sku: 'PPD-SCB-03P', cat: 'Household', unit: 'pack', price: 9500, cost: 7400, tax: 18.0, inc: 1, min: 12, stock: 35, img: 'https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=400&q=80' }
+  ];
+
+  // Shop 5: Modern Daily Needs & Stationers (Malviya Nagar, Delhi) - 20 Stationery & Student Supplies
+  const shop5Products = [
+    { id: 'prd_s5_1', sup: 'sup_3', shopId: 'shp_5', name: 'Classmate Pulse Spiral Notebook 300 Pgs (Pack of 4)', sku: 'MDN-STA-SPL', cat: 'Stationery', unit: 'pack', price: 42000, cost: 34000, tax: 12.0, inc: 1, min: 12, stock: 35, img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_2', sup: 'sup_3', shopId: 'shp_5', name: 'Reynolds 045 Fine Ballpoint Pens Blue/Black (Box of 20)', sku: 'MDN-PEN-REY', cat: 'Stationery', unit: 'box', price: 19000, cost: 14500, tax: 12.0, inc: 1, min: 15, stock: 50, img: 'https://images.unsplash.com/photo-1585336261026-6b2165089f2a?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_3', sup: 'sup_3', shopId: 'shp_5', name: 'Uni-ball Eye Fine Waterproof Roller Pen 0.5mm (Pack of 3)', sku: 'MDN-PEN-UNI', cat: 'Stationery', unit: 'pack', price: 24000, cost: 18500, tax: 18.0, inc: 1, min: 10, stock: 25, img: 'https://images.unsplash.com/photo-1585336261026-6b2165089f2a?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_4', sup: 'sup_3', shopId: 'shp_5', name: 'JK Copier A4 Paper Ream (75 GSM 500 Sheets)', sku: 'MDN-PPR-A4', cat: 'Stationery', unit: 'ream', price: 34000, cost: 28500, tax: 12.0, inc: 1, min: 10, stock: 40, img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_5', sup: 'sup_3', shopId: 'shp_5', name: 'Faber-Castell Triangular Colour Pencils (24 Shades Set)', sku: 'MDN-CLR-FBR', cat: 'Stationery', unit: 'set', price: 19500, cost: 15000, tax: 12.0, inc: 1, min: 8, stock: 22, img: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_6', sup: 'sup_3', shopId: 'shp_5', name: 'Doms Mathematical Drawing Geometry Instrument Box', sku: 'MDN-BOX-GEO', cat: 'Stationery', unit: 'box', price: 12500, cost: 9500, tax: 18.0, inc: 1, min: 10, stock: 30, img: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_7', sup: 'sup_3', shopId: 'shp_5', name: 'Fevicol MR Squeezy Glue Bottle 200g', sku: 'MDN-GLU-200', cat: 'Stationery', unit: 'bottle', price: 7500, cost: 5800, tax: 18.0, inc: 1, min: 15, stock: 45, img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_8', sup: 'sup_3', shopId: 'shp_5', name: 'Camlin Whiteboard Marker Bullet Tip (4 Assorted Colors)', sku: 'MDN-MRK-4CL', cat: 'Stationery', unit: 'pack', price: 14000, cost: 11000, tax: 18.0, inc: 1, min: 10, stock: 32, img: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_9', sup: 'sup_3', shopId: 'shp_5', name: 'Kangaro Stapler HD-10D with 1000 Staple Pins', sku: 'MDN-STP-KNG', cat: 'Stationery', unit: 'set', price: 18500, cost: 14500, tax: 18.0, inc: 1, min: 8, stock: 28, img: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_10', sup: 'sup_3', shopId: 'shp_5', name: '3M Post-it Sticky Notes Cube (400 Pastel Sheets)', sku: 'MDN-STK-CUB', cat: 'Stationery', unit: 'cube', price: 21000, cost: 16500, tax: 18.0, inc: 1, min: 8, stock: 20, img: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_11', sup: 'sup_3', shopId: 'shp_5', name: 'Cello Gripper Ballpoint Pens 0.7mm (Pack of 10)', sku: 'MDN-PEN-CEL', cat: 'Stationery', unit: 'pack', price: 10000, cost: 7500, tax: 12.0, inc: 1, min: 15, stock: 45, img: 'https://images.unsplash.com/photo-1585336261026-6b2165089f2a?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_12', sup: 'sup_1', shopId: 'shp_5', name: 'Nescafe Classic Instant Coffee Jar 100g', sku: 'MDN-COF-NES', cat: 'Beverages', unit: 'jar', price: 34000, cost: 28500, tax: 18.0, inc: 1, min: 8, stock: 24, img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_13', sup: 'sup_1', shopId: 'shp_5', name: 'Red Bull Energy Drink 250ml Can', sku: 'MDN-BEV-RBL', cat: 'Beverages', unit: 'can', price: 12500, cost: 10000, tax: 28.0, inc: 1, min: 12, stock: 30, img: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_14', sup: 'sup_1', shopId: 'shp_5', name: 'Maggi 2-Minute Masala Instant Noodles (Pack of 12)', sku: 'MDN-MAG-12P', cat: 'Snacks', unit: 'pack', price: 16800, cost: 13800, tax: 18.0, inc: 1, min: 10, stock: 40, img: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_15', sup: 'sup_1', shopId: 'shp_5', name: 'Doritos Cheese Supreme Nacho Tortilla Chips 150g', sku: 'MDN-CHP-DOR', cat: 'Snacks', unit: 'pack', price: 9000, cost: 7200, tax: 18.0, inc: 1, min: 12, stock: 35, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_16', sup: 'sup_1', shopId: 'shp_5', name: 'Cadbury Bournville Rich Cocoa 70% Dark Chocolate 80g', sku: 'MDN-CHK-BRN', cat: 'Snacks', unit: 'bar', price: 11000, cost: 8800, tax: 18.0, inc: 1, min: 10, stock: 26, img: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_17', sup: 'sup_1', shopId: 'shp_5', name: 'Head & Shoulders Cool Menthol Anti-Dandruff Shampoo 340ml', sku: 'MDN-SHM-340', cat: 'Personal Care', unit: 'bottle', price: 36000, cost: 29500, tax: 18.0, inc: 1, min: 8, stock: 18, img: 'https://images.unsplash.com/photo-1607006314144-8cb389745e31?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_18', sup: 'sup_1', shopId: 'shp_5', name: 'Dettol Disinfectant Multi-Surface Sanitizer Spray 500ml', sku: 'MDN-DET-SPR', cat: 'Household', unit: 'bottle', price: 21500, cost: 17500, tax: 18.0, inc: 1, min: 10, stock: 22, img: 'https://images.unsplash.com/photo-1584813470613-5b1c1cad3d69?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_19', sup: 'sup_1', shopId: 'shp_5', name: 'Colin Glass & Household Surface Cleaner 500ml Spray', sku: 'MDN-CLN-COL', cat: 'Household', unit: 'bottle', price: 10500, cost: 8400, tax: 18.0, inc: 1, min: 12, stock: 25, img: 'https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=400&q=80' },
+    { id: 'prd_s5_20', sup: 'sup_3', shopId: 'shp_5', name: 'Duracell Ultra Alkaline AA Batteries (Pack of 4)', sku: 'MDN-BAT-DUR', cat: 'Household', unit: 'pack', price: 16000, cost: 12800, tax: 18.0, inc: 1, min: 10, stock: 30, img: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=400&q=80' }
+  ];
+
+  const allProducts = [
+    ...shop1Products,
+    ...shop2Products,
+    ...shop3Products,
+    ...shop4Products,
+    ...shop5Products,
+  ];
+
+  for (const p of allProducts) {
     await execute(
       `INSERT INTO products (
         id, supplier_id, shop_id, name, sku, category, unit,
@@ -221,9 +319,9 @@ export async function seedDatabase(): Promise<void> {
         stock, min_stock_alert, active, image_url, created_at
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?)`,
       [
-        p.id, p.sup, 'shp_1', p.name, p.sku, p.cat, p.unit,
+        p.id, p.sup, p.shopId, p.name, p.sku, p.cat, p.unit,
         p.price, p.cost, p.tax, p.inc,
-        initialStock, p.min, p.img, dateIso(25)
+        p.stock, p.min, p.img, dateIso(25)
       ]
     );
 
@@ -231,15 +329,12 @@ export async function seedDatabase(): Promise<void> {
     await execute(
       `INSERT INTO inventory_movements (
         id, shop_id, product_id, movement_type, quantity_delta, reference_type, reference_id, reason, actor_id, created_at
-      ) VALUES (?, 'shp_1', ?, 'INITIAL_STOCK', ?, 'SYSTEM_INIT', 'INIT_SEED', 'Initial opening inventory seed', 'usr_admin', ?)`,
-      [`mov_init_${p.id}`, p.id, initialStock, dateIso(25)]
+      ) VALUES (?, ?, ?, 'INITIAL_STOCK', ?, 'SYSTEM_INIT', 'INIT_SEED', 'Initial opening inventory seed', 'usr_admin', ?)`,
+      [`mov_init_${p.id}`, p.shopId, p.id, p.stock, dateIso(25)]
     );
   }
 
   // 6. Seed Purchases from Suppliers across ALL 5 Shops
-  // This populates:
-  // - Retailer Purchases Register for ALL shops
-  // - Supplier Orders Queue for ALL 3 suppliers (Apex FMCG, Heritage Agro, Bharat Stationery)
   const purchaseScenarios = [
     // Purchases by Shop 1 (Sharma Kirana, Delhi)
     {
@@ -250,9 +345,9 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(22),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[8], qty: 30 }, // Tea
-        { product: masterProducts[9], qty: 25 }, // Coffee
-        { product: masterProducts[13], qty: 40 }, // Dettol Soap
+        { product: shop1Products[8], qty: 30 }, // Tea
+        { product: shop1Products[9], qty: 25 }, // Coffee
+        { product: shop1Products[13], qty: 40 }, // Dettol Soap
       ]
     },
     {
@@ -263,9 +358,9 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(15),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[0], qty: 60 }, // Atta
-        { product: masterProducts[1], qty: 50 }, // Rice
-        { product: masterProducts[2], qty: 45 }, // Toor Dal
+        { product: shop1Products[0], qty: 60 }, // Atta
+        { product: shop1Products[1], qty: 50 }, // Rice
+        { product: shop1Products[2], qty: 45 }, // Toor Dal
       ]
     },
     {
@@ -276,9 +371,9 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(7),
       supplyType: 'INTRA_STATE',
       lines: [
-        { product: masterProducts[20], qty: 40 }, // Notebooks
-        { product: masterProducts[21], qty: 70 }, // Pens
-        { product: masterProducts[22], qty: 20 }, // JK Paper
+        { product: shop1Products[20], qty: 40 }, // Notebooks
+        { product: shop1Products[21], qty: 70 }, // Pens
+        { product: shop1Products[22], qty: 20 }, // JK Paper
       ]
     },
 
@@ -291,10 +386,10 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(20),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[0], qty: 100 }, // Atta
-        { product: masterProducts[1], qty: 80 }, // Rice
-        { product: masterProducts[4], qty: 100 }, // Salt
-        { product: masterProducts[5], qty: 50 }, // Coriander
+        { product: shop2Products[0], qty: 100 }, // Atta
+        { product: shop2Products[1], qty: 80 }, // Rice
+        { product: shop2Products[4], qty: 100 }, // Salt
+        { product: shop2Products[5], qty: 50 }, // Coriander
       ]
     },
     {
@@ -305,9 +400,9 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(11),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[12], qty: 30 }, // Ghee
-        { product: masterProducts[15], qty: 45 }, // Surf Excel
-        { id: 'p_cake', product: masterProducts[19], qty: 60 }, // Silk
+        { product: shop2Products[12], qty: 30 }, // Ghee
+        { product: shop2Products[16], qty: 45 }, // Plant-Based Detergent
+        { product: shop2Products[11], qty: 60 }, // Makhana
       ]
     },
 
@@ -320,10 +415,10 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(18),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[3], qty: 50 }, // Mustard Oil
-        { product: masterProducts[2], qty: 60 }, // Toor Dal
-        { product: masterProducts[6], qty: 40 }, // Turmeric
-        { product: masterProducts[7], qty: 50 }, // Chana Dal
+        { product: shop3Products[9], qty: 50 }, // Sesame Oil
+        { product: shop3Products[7], qty: 60 }, // Moong Dal
+        { product: shop3Products[1], qty: 40 }, // Garam Masala
+        { product: shop3Products[2], qty: 50 }, // Jeera
       ]
     },
     {
@@ -334,9 +429,9 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(9),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[10], qty: 150 }, // Biscuits
-        { product: masterProducts[11], qty: 80 }, // Bhujia
-        { product: masterProducts[16], qty: 50 }, // Vim Gel
+        { product: shop3Products[10], qty: 150 }, // Masala Chai
+        { product: shop3Products[11], qty: 80 }, // Ratlami Sev
+        { product: shop3Products[17], qty: 50 }, // Shining Powder
       ]
     },
 
@@ -349,23 +444,23 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(16),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[8], qty: 50 }, // Tea
-        { product: masterProducts[13], qty: 60 }, // Dettol Soap
-        { product: masterProducts[14], qty: 50 }, // Colgate
-        { product: masterProducts[17], qty: 35 }, // Lizol
+        { product: shop4Products[14], qty: 50 }, // Tata Tea Gold
+        { product: shop4Products[18], qty: 60 }, // Handwash
+        { product: shop4Products[5], qty: 50 }, // Ghee
+        { product: shop4Products[19], qty: 35 }, // Scrubber
       ]
     },
     {
       id: 'pur_shp4_2',
       shop: shops[3],
-      sup: suppliers[2], // Bharat Stationery (Delhi -> UP = INTER_STATE)
-      inv: 'BOS/UP/772',
+      sup: suppliers[1], // Heritage Agro
+      inv: 'HAC/UP/772',
       date: dateIso(8),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[20], qty: 60 }, // Notebooks
-        { product: masterProducts[23], qty: 40 }, // Fevicol
-        { product: masterProducts[24], qty: 30 }, // Markers
+        { product: shop4Products[11], qty: 60 }, // Oats
+        { product: shop4Products[12], qty: 40 }, // Sunflower Oil
+        { product: shop4Products[13], qty: 30 }, // Atta
       ]
     },
 
@@ -378,10 +473,10 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(21),
       supplyType: 'INTRA_STATE',
       lines: [
-        { product: masterProducts[20], qty: 80 }, // Notebooks
-        { product: masterProducts[21], qty: 120 }, // Pens
-        { product: masterProducts[22], qty: 25 }, // A4 Paper
-        { product: masterProducts[25], qty: 20 }, // Staplers
+        { product: shop5Products[0], qty: 80 }, // Spiral Notebooks
+        { product: shop5Products[1], qty: 120 }, // Reynolds Pens
+        { product: shop5Products[3], qty: 25 }, // A4 Paper
+        { product: shop5Products[8], qty: 20 }, // Staplers
       ]
     },
     {
@@ -392,9 +487,9 @@ export async function seedDatabase(): Promise<void> {
       date: dateIso(12),
       supplyType: 'INTER_STATE',
       lines: [
-        { product: masterProducts[9], qty: 40 }, // Coffee
-        { product: masterProducts[18], qty: 100 }, // Coke Zero
-        { product: masterProducts[19], qty: 50 }, // Silk
+        { product: shop5Products[11], qty: 40 }, // Nescafe Coffee
+        { product: shop5Products[12], qty: 60 }, // Red Bull
+        { product: shop5Products[15], qty: 50 }, // Dark Chocolate
       ]
     }
   ];
@@ -521,9 +616,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(8),
       items: [
-        { product: masterProducts[0], qty: 1 }, // Atta
-        { product: masterProducts[1], qty: 1 }, // Rice
-        { product: masterProducts[10], qty: 4 }, // Biscuits
+        { product: shop1Products[0], qty: 1 }, // Atta
+        { product: shop1Products[1], qty: 1 }, // Rice
+        { product: shop1Products[10], qty: 4 }, // Biscuits
       ]
     },
     {
@@ -539,9 +634,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(6),
       items: [
-        { product: masterProducts[12], qty: 1 }, // Ghee
-        { product: masterProducts[13], qty: 2 }, // Dettol Soap
-        { product: masterProducts[15], qty: 1 }, // Surf Excel
+        { product: shop1Products[12], qty: 1 }, // Ghee
+        { product: shop1Products[13], qty: 2 }, // Dettol Soap
+        { product: shop1Products[15], qty: 1 }, // Surf Excel
       ]
     },
     {
@@ -557,8 +652,8 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'PICKUP',
       date: dateIso(3),
       items: [
-        { product: masterProducts[20], qty: 2 }, // Notebooks
-        { product: masterProducts[21], qty: 1 }, // Pens
+        { product: shop1Products[20], qty: 2 }, // Notebooks
+        { product: shop1Products[21], qty: 1 }, // Pens
       ]
     },
     {
@@ -574,8 +669,8 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(1),
       items: [
-        { product: masterProducts[9], qty: 1 }, // Coffee
-        { product: masterProducts[19], qty: 2 }, // Silk
+        { product: shop1Products[9], qty: 1 }, // Coffee
+        { product: shop1Products[19], qty: 2 }, // Silk
       ]
     },
     {
@@ -591,7 +686,7 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'PICKUP',
       date: dateIso(4),
       items: [
-        { product: masterProducts[4], qty: 2 }, // Salt
+        { product: shop1Products[4], qty: 2 }, // Salt
       ]
     },
 
@@ -609,9 +704,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(7),
       items: [
-        { product: masterProducts[0], qty: 2 }, // Atta
-        { product: masterProducts[3], qty: 2 }, // Mustard Oil
-        { product: masterProducts[12], qty: 1 }, // Ghee
+        { product: shop2Products[0], qty: 2 }, // Atta
+        { product: shop2Products[3], qty: 2 }, // Mustard Oil
+        { product: shop2Products[12], qty: 1 }, // Ghee
       ]
     },
     {
@@ -627,9 +722,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(5),
       items: [
-        { product: masterProducts[1], qty: 1 }, // Rice
-        { product: masterProducts[15], qty: 2 }, // Surf Excel
-        { product: masterProducts[16], qty: 2 }, // Vim Gel
+        { product: shop2Products[1], qty: 1 }, // Rice
+        { product: shop2Products[16], qty: 2 }, // Plant-Based Detergent
+        { product: shop2Products[17], qty: 2 }, // Kitchen Cleaner
       ]
     },
     {
@@ -645,8 +740,8 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'PICKUP',
       date: dateIso(2),
       items: [
-        { product: masterProducts[8], qty: 2 }, // Tea
-        { product: masterProducts[19], qty: 3 }, // Silk
+        { product: shop2Products[8], qty: 2 }, // Tulsi Green Tea
+        { product: shop2Products[11], qty: 3 }, // Makhana
       ]
     },
 
@@ -664,9 +759,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(9),
       items: [
-        { product: masterProducts[2], qty: 2 }, // Toor Dal
-        { product: masterProducts[5], qty: 3 }, // Coriander
-        { product: masterProducts[6], qty: 2 }, // Turmeric
+        { product: shop3Products[7], qty: 2 }, // Moong Dal
+        { product: shop3Products[2], qty: 3 }, // Jeera
+        { product: shop3Products[1], qty: 2 }, // Garam Masala
       ]
     },
     {
@@ -682,8 +777,8 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'PICKUP',
       date: dateIso(4),
       items: [
-        { product: masterProducts[10], qty: 5 }, // Biscuits
-        { product: masterProducts[11], qty: 2 }, // Bhujia
+        { product: shop3Products[11], qty: 4 }, // Ratlami Sev
+        { product: shop3Products[12], qty: 2 }, // Bikaneri Bhujia
       ]
     },
 
@@ -701,9 +796,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(6),
       items: [
-        { product: masterProducts[8], qty: 1 }, // Tea
-        { product: masterProducts[13], qty: 1 }, // Dettol Soap
-        { product: masterProducts[14], qty: 2 }, // Colgate
+        { product: shop4Products[0], qty: 2 }, // Amul Taaza Milk
+        { product: shop4Products[2], qty: 1 }, // Malai Paneer
+        { product: shop4Products[3], qty: 1 }, // Table Butter
       ]
     },
     {
@@ -719,8 +814,8 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'PICKUP',
       date: dateIso(2),
       items: [
-        { product: masterProducts[17], qty: 1 }, // Lizol
-        { product: masterProducts[20], qty: 2 }, // Notebooks
+        { product: shop4Products[6], qty: 2 }, // Brown Bread
+        { product: shop4Products[7], qty: 2 }, // Brown Eggs
       ]
     },
 
@@ -738,9 +833,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'DELIVERY',
       date: dateIso(8),
       items: [
-        { product: masterProducts[20], qty: 3 }, // Notebooks
-        { product: masterProducts[21], qty: 2 }, // Pens
-        { product: masterProducts[22], qty: 1 }, // JK Paper
+        { product: shop5Products[0], qty: 3 }, // Spiral Notebooks
+        { product: shop5Products[1], qty: 2 }, // Reynolds Pens
+        { product: shop5Products[3], qty: 1 }, // A4 Paper
       ]
     },
     {
@@ -756,9 +851,9 @@ export async function seedDatabase(): Promise<void> {
       fulfillment: 'PICKUP',
       date: dateIso(3),
       items: [
-        { product: masterProducts[9], qty: 1 }, // Coffee
-        { product: masterProducts[18], qty: 2 }, // Coke Zero
-        { product: masterProducts[24], qty: 1 }, // Markers
+        { product: shop5Products[11], qty: 1 }, // Nescafe Coffee
+        { product: shop5Products[12], qty: 2 }, // Red Bull
+        { product: shop5Products[7], qty: 1 }, // Whiteboard Markers
       ]
     }
   ];
