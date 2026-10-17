@@ -2,8 +2,15 @@
   "name": "smart-retail-india",
   "version": "1.0.0",
   "description": "GST-aware digital marketplace for companies, small shopkeepers, and consumers",
+  "workspaces": [
+    "server",
+    "client"
+  ],
   "scripts": {
+    "setup": "npm install && npm run seed",
     "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "start": "npm run dev",
+    "seed": "npm --prefix server run seed",
     "server:dev": "npm --prefix server run dev",
     "client:dev": "npm --prefix client run dev",
     "build": "npm --prefix server run build && npm --prefix client run build",

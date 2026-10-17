@@ -8,33 +8,54 @@
 
 ---
 
-## 1. Quick Start & Execution Commands
+## 1. Quick Start & Execution via Git / Terminal
 
-### Prerequisites
-- **Node.js**: v20+ or v24+
-- **NPM**: v10+
-
-### Option A: Run Both Frontend & Backend Concurrently (Recommended)
-From the root directory (`smart-retail-india/`):
+### Clone Repository via Git
 ```bash
-# 1. Install root dependencies (concurrently)
-npm install
+git clone https://github.com/rathaursanjit-svg/hack.git
+cd hack
+```
 
-# 2. Install server dependencies
-npm --prefix server install
+---
 
-# 3. Install client dependencies
-npm --prefix client install
+### Option A: 1-Click Launchers (Easiest)
 
-# 4. Seed the SQLite database with realistic Indian retail demo records
-npm --prefix server run seed
+- **On Windows (Command Prompt or PowerShell or double-click)**:
+  ```cmd
+  start.bat
+  ```
+  *(Or in PowerShell: `.\start.bat`)*
 
-# 5. Launch both server (port 5000) and client (port 5173) together
+- **On Git Bash / Linux / macOS**:
+  ```bash
+  chmod +x start.sh
+  ./start.sh
+  ```
+
+---
+
+### Option B: Standard Terminal Commands (Cross-Platform)
+
+```bash
+# 1. Install all dependencies (root, server, and client) and seed database
+npm run setup
+
+# 2. Launch both Server (port 5000) and Client (port 5173) together
 npm run dev
 ```
 
-### Option B: Run Server and Client Separately
-**Terminal 1 (Backend API & SQLite DB):**
+> **Windows PowerShell Note**: If your PowerShell restricts `.ps1` execution scripts, use `npm.cmd` instead:
+> ```powershell
+> npm.cmd run setup
+> npm.cmd run dev
+> ```
+> Or run `.\start.bat`.
+
+---
+
+### Option C: Run Server and Client in Separate Terminals
+
+**Terminal 1 (Backend Server & SQLite Database):**
 ```bash
 cd server
 npm install
@@ -43,7 +64,7 @@ npm run dev
 ```
 *Backend runs on `http://localhost:5000`.*
 
-**Terminal 2 (Frontend React App):**
+**Terminal 2 (Frontend React + Vite App):**
 ```bash
 cd client
 npm install
